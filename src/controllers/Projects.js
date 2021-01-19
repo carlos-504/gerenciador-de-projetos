@@ -20,4 +20,18 @@ module.exports = {
             return res.status(400).send("Erro ao efetuar cadastro");
         }
     },
+
+    getProject: async (req, res) => {
+        try {
+            const id = req.params.id;
+
+            const project = await Projects.findOne({ _id: id });
+
+            return res.send(project);
+        } catch (erro) {
+            return res
+                .status(400)
+                .send({ message: "Erro ao buscar Projeto", erro: erro });
+        }
+    },
 };

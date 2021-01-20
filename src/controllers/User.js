@@ -26,12 +26,10 @@ module.exports = {
 
             return res.send(users);
         } catch (erro) {
-            return res
-                .status(400)
-                .send({
-                    message: "Não foi possivel lisar usuários",
-                    erro: erro,
-                });
+            return res.status(400).send({
+                message: "Não foi possivel lisar usuários",
+                erro: erro,
+            });
         }
     },
 };

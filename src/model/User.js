@@ -10,10 +10,17 @@ const userSchema = new Schema({
     email: {
         type: String,
         required: true,
+        lowercase: true,
+        unique: true,
     },
     password: {
         type: String,
         required: true,
+        select: false,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
     },
 });
 

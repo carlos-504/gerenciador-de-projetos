@@ -3,5 +3,5 @@ const conn = require("./src/db/mongoose");
 
 conn.then(() => {
     console.log("Conexão com mongo db realizada com sucesso");
-    app.listen(8080, () => console.log("Servidor rodando na porta 8080"));
+    app.listen(3003, () => console.log("Servidor rodando na porta 3003"));
 }).catch((erro) => console.log(`Errudo ${erro}`));

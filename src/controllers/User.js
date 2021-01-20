@@ -1,3 +1,4 @@
+const bcrypt = require("bcryptjs");
 const User = require("../model/User");
 
 module.exports = {
@@ -76,6 +77,29 @@ module.exports = {
                 message: "Não foi possivel deletar usuário",
                 erro: erro,
             });
+        }
+    },
+
+    authenticate: async (req, res) => {
+        const { email, password } = req.body;
+        try {
+            const user = await User.findOne({ email }).select("+password");
+
+            if (!user) {
+                return res.status(400).send({ erro: "Usuário não encontrado" });
+            }
+
+            const validPassword = await bcrypt.compare(password, user.password);
+
+            if (!validPassword) {
+                return res.status(400).send({ erro: "Senha inválida" });
+            }
+
+            user.password = undefined;
+
+            return res.send({ user });
+        } catch (erro) {
+            return res.status(400).send({ erro: erro.message });
         }
     },
 };

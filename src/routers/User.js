@@ -10,4 +10,6 @@ module.exports = (app) => {
     app.put("/updateUser/:id", userControllers.update);
 
     app.delete("/deleteUser/:id", userControllers.delete);
+
+    app.post("/authenticate", userControllers.authenticate);
 };

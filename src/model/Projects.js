@@ -22,6 +22,10 @@ const projectsSchema = new Schema({
         type: Number,
         required: true,
     },
+    mainLanguage: {
+        type: "String",
+        required: true,
+    },
 });
 
 module.exports = mongoose.model("Projects", projectsSchema);

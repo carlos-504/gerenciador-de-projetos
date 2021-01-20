@@ -10,8 +10,9 @@ module.exports = {
             }
 
             const user = await User.create(req.body);
+            user.password = undefined;
 
-            return res.send(req.body);
+            return res.send({ user });
         } catch (erro) {
             return res.status(400).send({
                 message: "Não foi possível cadastrar o usuário",

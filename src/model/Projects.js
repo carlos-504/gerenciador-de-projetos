@@ -26,6 +26,10 @@ const projectsSchema = new Schema({
         type: "String",
         required: true,
     },
+    repositoryLink: {
+        type: "String",
+        required: true,
+    },
 });
 
 module.exports = mongoose.model("Projects", projectsSchema);

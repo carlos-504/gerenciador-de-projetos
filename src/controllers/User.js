@@ -1,5 +1,7 @@
 const bcrypt = require("bcryptjs");
 const User = require("../model/User");
+const jwt = require("jsonwebtoken");
+const authConfig = require("../config/authConfig.json");
 
 module.exports = {
     register: async (req, res) => {
@@ -97,9 +99,19 @@ module.exports = {
 
             user.password = undefined;
 
-            return res.send({ user });
+            const token = jwt.sign({ id: user.id }, authConfig.secret, {
+                expiresIn: 865400,
+            });
+
+            res.cookie("token", token, { httpOnly: true });
+            return res.send({ user, token });
         } catch (erro) {
-            return res.status(400).send({ erro: erro.message });
+            return res
+                .status(400)
+                .send({
+                    message: "Não foi possível logar o usuário",
+                    erro: erro.message,
+                });
         }
     },
 };
